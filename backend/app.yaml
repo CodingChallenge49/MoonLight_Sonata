@@ -1,11 +1,13 @@
-service:default
-runtime:java11
-env:standard
-runtime_config:
-    jdk:openjdk11
-env_variables:
-    SPRING_PROFILES_ACTIVE:"production"
-handlers:
--   url: /.*
-manual_scaling:
-    instances:1
+--- 
+env: standard
+env_variables: 
+  SPRING_PROFILES_ACTIVE: production
+handlers: 
+  - 
+    url: /.*
+manual_scaling: 
+  instances: 1
+runtime: java11
+runtime_config: 
+  jdk: openjdk11
+service: default
