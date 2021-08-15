@@ -1,2 +1,0 @@
-{dbName='UPUGR-db-grads-group-4', userName='UPUGR-group-4', password='snskblyxvf'}
-CLOUD SQL INSTANCE ID: grad-coding-challenge-1:us-central1:db-coding-grads-v1 

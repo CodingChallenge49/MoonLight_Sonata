@@ -23,6 +23,8 @@ public class MoodHistory {
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dateTime;
+	@Column(name = "name")
+	private String name;
 	@Column(name="email")
 	private String email;
 	@Column(name="rating")
@@ -31,13 +33,15 @@ public class MoodHistory {
 	private String hashtag;
 	@Column(name="mood_justification")
 	private String moodJustification;
+	
 	public MoodHistory() {
 		
 	}
-	public MoodHistory(int id, Date dateTime, String email, int rating, String hashtag, String moodJustification) {
+	public MoodHistory(int id, Date dateTime, String name, String email, int rating, String hashtag, String moodJustification) {
 		super();
 		this.id = id;
 		this.dateTime = dateTime;
+		this.name = name;
 		this.email = email;
 		this.rating = rating;
 		this.moodJustification = moodJustification;
@@ -79,6 +83,12 @@ public class MoodHistory {
 	}
 	public void setMoodJustification(String moodJustification) {
 		this.moodJustification = moodJustification;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

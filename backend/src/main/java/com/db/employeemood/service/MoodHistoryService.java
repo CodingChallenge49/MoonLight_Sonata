@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.db.employeemood.model.MoodHistory;
 import com.db.employeemood.repository.MoodHistoryRepository;
+import com.db.employeemood.response.PiechartData;
+import com.db.employeemood.response.AllHashtagsResponse;
+import com.db.employeemood.response.HashtagCount;
 
 @Service
 public class MoodHistoryService {
@@ -35,9 +39,13 @@ public class MoodHistoryService {
 		return moodHistory;
 	}
 	
-	public List<String> getAllHashtags(){
+	public List<AllHashtagsResponse> getAllHashtags(){
 		List<String> hashtagsResponse = (List)moodHistoryRepository.findAllHashtags();
-		return hashtagsResponse;
+		List<AllHashtagsResponse> response = new ArrayList<>();
+		hashtagsResponse.forEach((hashtag)->{
+			response.add(new AllHashtagsResponse(hashtag));
+		});
+		return response;
 	}
 	
 	public List<String> getTopDailyHashtags(String date){
@@ -48,5 +56,27 @@ public class MoodHistoryService {
 	public List<MoodHistory> getMoodsByHashtag(String hashtag){
 		List<MoodHistory> moodsByHashtag = (List)moodHistoryRepository.findByHashtag(hashtag);
 		return moodsByHashtag;
+	}
+	
+	public List<PiechartData> getCountByRatingGroup(String date){
+		List<PiechartData> dataResponse = new ArrayList<>();
+		for(int i=1;i<10;i+=2) {
+			int numPeople = moodHistoryRepository.findCountByRatingGroup(date, i, i+1);
+			PiechartData data = new PiechartData(numPeople,String.valueOf(i)+"-"+String.valueOf(i+1));
+			dataResponse.add(data);
+		}
+		return dataResponse;
+	}
+	
+	public List<HashtagCount> getCountByHashtag() {
+		List<Object[]> list = moodHistoryRepository.getCountByHashtag();
+		List<HashtagCount> response = new ArrayList<>();
+		
+		list.forEach((eachData)->{
+			String hashtag = String.valueOf(eachData[0]);
+			int count = Integer.parseInt(String.valueOf(eachData[1]));
+			response.add(new HashtagCount(hashtag,count));
+		});
+		return response;
 	}
 }
