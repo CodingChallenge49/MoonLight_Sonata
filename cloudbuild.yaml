@@ -10,7 +10,6 @@ steps:
     entrypoint:"bash"
     args:["-c","gcloud app deploy --version=react frontend/app.yaml"]
     
-steps:
 -   id:"Deploy springboot app App Engine"
     name:"gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint:"bash"
