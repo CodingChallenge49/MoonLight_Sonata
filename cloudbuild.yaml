@@ -1,14 +1,14 @@
 steps:
 #Installing
 -   name:'gcr.io/cloud-builders/npm'
-    args: ['--prefix','frontend','install','react-scripts','--save']
+    args:['--prefix','frontend','install','react-scripts','--save']
     
 -   name:'gcr.io/cloud-builders/npm'
-    args: ['--prefix','frontend','run','build']
+    args:['--prefix','frontend','run','build']
 
 -   name:'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint:'bash'
-    args: ['-c','gcloud app deploy --version=react frontend/app.yaml']
+    args:['-c','gcloud app deploy --version=react frontend/app.yaml']
     
 steps:
 -   id:'Deploy springboot app App Engine'
