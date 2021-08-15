@@ -1,0 +1,30 @@
+--- 
+steps: 
+  - 
+    args: 
+      - "-c"
+      - "gcloud app deploy --version=app1 backend/app.yaml"
+    entrypoint: bash
+    id: "Deploy springboot app App Engine"
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  - 
+    args: 
+      - "--prefix"
+      - frontend
+      - install
+      - react-scripts
+      - "--save"
+    name: gcr.io/cloud-builders/npm
+  - 
+    args: 
+      - "--prefix"
+      - frontend
+      - run
+      - build
+    name: gcr.io/cloud-builders/npm
+  - 
+    args: 
+      - "-c"
+      - "gcloud app deploy --version=react frontend/app.yaml"
+    entrypoint: bash
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
