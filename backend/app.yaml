@@ -4,6 +4,7 @@ env_variables:
   SPRING_PROFILES_ACTIVE: production
 handlers: 
   - 
+    script: "this field is required, but ignored"
     url: /.*
 manual_scaling: 
   instances: 1
