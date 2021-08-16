@@ -3,6 +3,8 @@ package com.db.employeemood;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -25,4 +27,8 @@ public class Application {
           .paths(PathSelectors.any())                          
           .build();                                           
     }
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		return new JavaMailSenderImpl();
+	}
 }
