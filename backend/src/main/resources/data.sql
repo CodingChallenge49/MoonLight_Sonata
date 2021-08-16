@@ -29,7 +29,7 @@ CREATE TABLE `employee` (
   `name` varchar(255) DEFAULT NULL,
   `manager_email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `mood_history` (
   PRIMARY KEY (`id`),
   KEY `email_idx` (`email`),
   CONSTRAINT `email` FOREIGN KEY (`email`) REFERENCES `employee` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
