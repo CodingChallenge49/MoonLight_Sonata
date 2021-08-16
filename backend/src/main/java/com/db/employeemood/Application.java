@@ -27,8 +27,4 @@ public class Application {
           .paths(PathSelectors.any())                          
           .build();                                           
     }
-//	@Bean
-//	public JavaMailSender getJavaMailSender() {
-//		return new JavaMailSenderImpl();
-//	}
 }

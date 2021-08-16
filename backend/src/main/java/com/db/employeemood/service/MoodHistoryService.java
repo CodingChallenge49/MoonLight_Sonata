@@ -2,13 +2,10 @@ package com.db.employeemood.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -90,17 +87,15 @@ public class MoodHistoryService {
 		return response;
 	}
 	
-	public void sendEmail(String date,String to, String employee) {
+	public void sendEmail(String date, String to, String employee) {
 		int count = moodHistoryRepository.findCountOfDepression(date, employee);
-		System.out.println(date+to+count);
 		if(count >= 3) {
 			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 			simpleMailMessage.setFrom("mood.emailto.manager@gmail.com");
 			simpleMailMessage.setTo(to);
-			simpleMailMessage.setSubject("Have a look at your employee - Employee Mood");
-			simpleMailMessage.setText("Your employee " + to + " has given very low mood ratings through our portal over last week.\n You can get in touch with your employee.");
+			simpleMailMessage.setSubject("Have a look at your employee - MoodLight Sonata");
+			simpleMailMessage.setText("Your employee " + employee + " has given very low mood ratings through our portal over last week.\nThis is the right time to get in touch with your employee.\n\n\nThanks, MoodLight Sonata Team");
 			javaMailSender.send(simpleMailMessage);
-			System.out.println("Mail Sent");
 		}
 		
 	}
