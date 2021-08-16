@@ -16,7 +16,7 @@ export const isVisible = (selected) => {
 };
 
 export const fetchLiveFeed = () => async (dispatch) => {
-  const data = await axios.get("http://localhost:8080/getTopHistory/50");
+  const data = await axios.get("https://grads-coding-challenge-group-4.uc.r.appspot.com/getTopHistory/50");
   console.log(data);
   dispatch({ type: "LIVE_FEED", payload: data.data });
 };
