@@ -5,7 +5,7 @@ const initialState = {
   results: [],
   value: "",
 };
-//first initialization should be provided
+
 const showSidebar = (isOpen = false, action) => {
   if (action.type === "TOGGLE_SIDEBAR") return action.payload;
   return isOpen;
@@ -38,6 +38,7 @@ function exampleReducer(state, action) {
   }
   return initialState;
 }
+
 const reducers = combineReducers({
   isOpen: showSidebar,
   selectedNavOption: selectedNav,

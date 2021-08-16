@@ -1,6 +1,6 @@
-//directly pass the value to be set
 import axios from "axios";
 import _ from "lodash";
+
 export const toggleHamburger = (isOpen) => {
   return {
     type: "TOGGLE_SIDEBAR",
@@ -16,8 +16,9 @@ export const isVisible = (selected) => {
 };
 
 export const fetchLiveFeed = () => async (dispatch) => {
-  const data = await axios.get("https://grads-coding-challenge-group-4.uc.r.appspot.com/getTopHistory/50");
-  console.log(data);
+  const data = await axios.get(
+    "https://grads-coding-challenge-group-4.uc.r.appspot.com/getTopHistory/50"
+  );
   dispatch({ type: "LIVE_FEED", payload: data.data });
 };
 

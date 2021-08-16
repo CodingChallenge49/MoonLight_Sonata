@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { toggleHamburger } from "../actions";
 
 const HamburgerComponent = (props) => {
-  // console.log(props);
   return <Hamburger toggled={props.isOpen} toggle={props.toggleHamburger} />;
 };
 

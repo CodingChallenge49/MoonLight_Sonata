@@ -1,5 +1,4 @@
 import _ from "lodash";
-import faker from "faker";
 import React, { useEffect, useRef, useState } from "react";
 import { Search, Grid } from "semantic-ui-react";
 import { clean, data, finishSearch, updateSelect } from "../actions";
@@ -13,7 +12,9 @@ function Hashtag(props) {
   sourceRef.current = source;
 
   async function fetchData() {
-    const result = await axios.get("https://grads-coding-challenge-group-4.uc.r.appspot.com/getAllHashtags");
+    const result = await axios.get(
+      "https://grads-coding-challenge-group-4.uc.r.appspot.com/getAllHashtags"
+    );
     setSource(result.data);
   }
   useEffect(() => {

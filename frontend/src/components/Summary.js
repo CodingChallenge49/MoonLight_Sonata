@@ -22,7 +22,7 @@ function getColor() {
 }
 
 const pieOptions = {
-  title: "",
+  title: "Mood Distribution",
   slices: [
     {
       color: "#2BB673",
@@ -73,7 +73,7 @@ class Summary extends React.Component {
       (today.getMonth() + 1) +
       "-" +
       today.getDate();
-    date = "2021-08-15";
+
     //For PieChart
     const result = await axios.get(
       `https://grads-coding-challenge-group-4.uc.r.appspot.com/getCountByRatingGroup/${date}`

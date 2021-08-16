@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Icon,
-  Menu,
-  Segment,
-  Sidebar,
-} from "semantic-ui-react";
+import { Grid, Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { isVisible, toggleHamburger } from "../actions";
 import HamburgerComponent from "./HamburgerComponent";
@@ -14,7 +8,6 @@ import FormComponent from "./FormComponent";
 import Summary from "./Summary";
 
 const SidebarComponent = (props) => {
-  console.log(props);
   let display = <LiveFeed />;
   if (props.selectedNavOption === "live") {
     display = <LiveFeed />;
@@ -25,7 +18,7 @@ const SidebarComponent = (props) => {
   }
   return (
     <div>
-      <Grid columns={1} style={{ height: "120vh" }}>
+      <Grid columns={1} color="red">
         <Grid.Column>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
@@ -71,7 +64,11 @@ const SidebarComponent = (props) => {
             </Sidebar>
             <Sidebar.Pusher dimmed={props.isOpen}>
               <Segment basic>
-                <Grid centered columns={2}>
+                <Grid
+                  centered
+                  columns={2}
+                  style={{ backgroundColor: "aliceblue" }}
+                >
                   <Grid.Column width={1}>
                     <HamburgerComponent />
                   </Grid.Column>

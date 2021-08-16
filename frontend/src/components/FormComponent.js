@@ -26,10 +26,6 @@ const handle = (smileys, stopPoints) => {
 };
 
 class SmileySlider extends React.PureComponent {
-  // constructor(props){
-  //   super(props)
-  //   this.prio
-  // }
   render() {
     const sliderHandle = handle(this.props.smileys, this.props.stopPoints);
     return (
@@ -82,9 +78,6 @@ function FormComponent(props) {
   const [email, setEmail] = useState("");
   const [rating, setRating] = useState(1);
   const [moodJustification, setMoodJustification] = useState("");
-  const [hashtag, setHashtag] = useState("");
-  // console.log(rating);
-  const ref = React.createRef();
 
   async function postData() {
     let hashtag = props.exampleReducer.value;
@@ -109,18 +102,16 @@ function FormComponent(props) {
       moodJustification,
       hashtag,
     };
-    console.log(formData);
-    await axios.post("https://grads-coding-challenge-group-4.uc.r.appspot.com/saveMoodHistory", formData);
+    await axios.post(
+      "https://grads-coding-challenge-group-4.uc.r.appspot.com/saveMoodHistory",
+      formData
+    );
   }
   return (
     <div style={{ textAlign: "center" }}>
       <Grid columns={3}>
         <Grid.Column width={5}>
-          <img
-            // style={{ width: "25%" }}
-            src="motivation_1.gif"
-            alt="motivation"
-          />
+          <img src="motivation_1.gif" alt="motivation" />
         </Grid.Column>
         <Grid.Column width={6}>
           <img
@@ -130,11 +121,7 @@ function FormComponent(props) {
           />
         </Grid.Column>
         <Grid.Column width={5}>
-          <img
-            // style={{ width: "25%" }}
-            src="motivation_2.gif"
-            alt="motivation_1"
-          />
+          <img src="motivation_2.gif" alt="motivation_1" />
         </Grid.Column>
       </Grid>
       <Modal
@@ -169,7 +156,6 @@ function FormComponent(props) {
           >
             <Icon name="close" />
           </Button>
-          {/* <span aria-hidden="true">&times;</span> */}
         </Modal.Header>
         <Modal.Content>
           <Form>
