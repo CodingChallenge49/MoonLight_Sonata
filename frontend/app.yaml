@@ -9,3 +9,4 @@ handlers:
     upload: build/index.html
     url: /.*
 runtime: nodejs10
+service: frontend
