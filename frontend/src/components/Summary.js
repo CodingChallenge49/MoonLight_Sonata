@@ -76,7 +76,7 @@ class Summary extends React.Component {
     date = "2021-08-15";
     //For PieChart
     const result = await axios.get(
-      `http://localhost:8080/getCountByRatingGroup/${date}`
+      `https://grads-coding-challenge-group-4.uc.r.appspot.com/getCountByRatingGroup/${date}`
     );
     let charData = [["call", "no"]];
     for (let column of result.data) {
@@ -85,7 +85,7 @@ class Summary extends React.Component {
 
     //For HashTags
     const getHashtags = await axios.get(
-      "http://localhost:8080/getCountByHashtag"
+      "https://grads-coding-challenge-group-4.uc.r.appspot.com/getCountByHashtag"
     );
     this.setState({ hashtag: getHashtags.data, columns: charData });
   }

@@ -110,7 +110,7 @@ function FormComponent(props) {
       hashtag,
     };
     console.log(formData);
-    await axios.post("http://localhost:8080/saveMoodHistory", formData);
+    await axios.post("https://grads-coding-challenge-group-4.uc.r.appspot.com/saveMoodHistory", formData);
   }
   return (
     <div style={{ textAlign: "center" }}>
