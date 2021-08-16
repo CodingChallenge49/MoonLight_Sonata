@@ -9,9 +9,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.db.employeemood.model.Employee;
 import com.db.employeemood.model.MoodHistory;
+import com.db.employeemood.repository.EmployeeRepository;
 import com.db.employeemood.repository.MoodHistoryRepository;
 import com.db.employeemood.response.PiechartData;
 import com.db.employeemood.response.AllHashtagsResponse;
@@ -21,6 +25,12 @@ import com.db.employeemood.response.HashtagCount;
 public class MoodHistoryService {
 	@Autowired
 	MoodHistoryRepository moodHistoryRepository;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	public MoodHistory saveMoodHistory(MoodHistory moodHistory) {
 		moodHistoryRepository.save(moodHistory);
@@ -62,7 +72,7 @@ public class MoodHistoryService {
 		List<PiechartData> dataResponse = new ArrayList<>();
 		for(int i=1;i<10;i+=2) {
 			int numPeople = moodHistoryRepository.findCountByRatingGroup(date, i, i+1);
-			PiechartData data = new PiechartData(numPeople,String.valueOf(i)+"-"+String.valueOf(i+1));
+			PiechartData data = new PiechartData(numPeople,"Rating " + String.valueOf(i)+"-"+String.valueOf(i+1));
 			dataResponse.add(data);
 		}
 		return dataResponse;
@@ -78,5 +88,25 @@ public class MoodHistoryService {
 			response.add(new HashtagCount(hashtag,count));
 		});
 		return response;
+	}
+	
+	public void sendEmail(String date,String to, String employee) {
+		int count = moodHistoryRepository.findCountOfDepression(date, employee);
+		System.out.println(date+to+count);
+		if(count >= 3) {
+			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+			simpleMailMessage.setFrom("mood.emailto.manager@gmail.com");
+			simpleMailMessage.setTo(to);
+			simpleMailMessage.setSubject("Have a look at your employee - Employee Mood");
+			simpleMailMessage.setText("Your employee " + to + " has given very low mood ratings through our portal over last week.\n You can get in touch with your employee.");
+			javaMailSender.send(simpleMailMessage);
+			System.out.println("Mail Sent");
+		}
+		
+	}
+	
+	public String getManager(String email) {
+		Employee employee = employeeRepository.findById(email).get();
+		return employee.getManager_email();
 	}
 }

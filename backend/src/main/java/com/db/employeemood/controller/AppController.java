@@ -43,9 +43,8 @@ public class AppController {
 	@PostMapping("/saveMoodHistory")
 	private ResponseEntity<MoodHistory> saveMoodHistory(@RequestBody MoodHistory moodHistory) {
 		MoodHistory moodHistoryResponse = moodHistoryService.saveMoodHistory(moodHistory);
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(moodHistoryResponse.getDateTime()));
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(moodHistory.getDateTime()));
-//		System.out.println(moodHistory.getDateTime());
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(moodHistory.getDateTime());  
+		moodHistoryService.sendEmail(date, moodHistoryService.getManager(moodHistory.getEmail()), moodHistory.getEmail());
 		return new ResponseEntity<MoodHistory>(moodHistoryResponse,HttpStatus.OK);
 	}
 	

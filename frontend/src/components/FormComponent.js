@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Form } from "semantic-ui-react";
+import { Button, Modal, Form, Grid, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -110,83 +110,140 @@ function FormComponent(props) {
       hashtag,
     };
     console.log(formData);
-    await axios.post("https://grads-coding-challenge-group-4.uc.r.appspot.com/saveMoodHistory", formData);
+    await axios.post("http://localhost:8080/saveMoodHistory", formData);
   }
   return (
-    <Modal
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      trigger={<Button>Rate your Mood</Button>}
-    >
-      <Modal.Header style={{ fontFamily: "Roboto Slab" }}>
-        Submit your Mood Rating
-      </Modal.Header>
-      <Form>
-        <Form.Field style={{ width: "90%", margin: "10px auto" }}>
-          <label style={{ fontFamily: "Verdana" }}>Rate</label>
-          <Sliders setRate={setRating}></Sliders>
-        </Form.Field>
-
-        <div className="two fields">
-          <Form.Field
-            style={{
-              width: "40%",
-              margin: "15px",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <label style={{ fontFamily: "Verdana" }}>Name</label>
-            <input
-              placeholder="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Field>
-          <Form.Field
-            style={{
-              width: "40%",
-              margin: "15px",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <label style={{ fontFamily: "Verdana" }}>Email ID</label>
-            <input
-              placeholder="Email ID"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Field>
-        </div>
-
-        <Form.Field style={{ width: "90%", margin: "15px auto" }}>
-          <label style={{ fontFamily: "Verdana" }}>Rating Justification</label>
-          <textarea
-            placeholder="Justify your Rating"
-            onChange={(e) => setMoodJustification(e.target.value)}
+    <div style={{ textAlign: "center" }}>
+      <Grid columns={3}>
+        <Grid.Column width={5}>
+          <img
+            // style={{ width: "25%" }}
+            src="motivation_1.gif"
+            alt="motivation"
           />
-        </Form.Field>
-        <Form.Field style={{ width: "90%", margin: "15px auto" }}>
-          <label style={{ fontFamily: "Verdana" }}>Hashtags</label>
-          <Hashtag />
-        </Form.Field>
-      </Form>
-      <Modal.Actions>
-        <Button color="black" onClick={() => setOpen(false)}>
-          Cancel
-        </Button>
-        <Button
-          content="Submit"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={(e) => {
-            setOpen(false);
-            postData();
-          }}
-          positive
-        />
-      </Modal.Actions>
-    </Modal>
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <img
+            src="emoji_gif.gif"
+            alt="gif"
+            style={{ width: "88%", borderRadius: "25px" }}
+          />
+        </Grid.Column>
+        <Grid.Column width={5}>
+          <img
+            // style={{ width: "25%" }}
+            src="motivation_2.gif"
+            alt="motivation_1"
+          />
+        </Grid.Column>
+      </Grid>
+      <Modal
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        trigger={
+          <Button
+            style={{
+              position: "relative",
+              bottom: "91px",
+              backgroundColor: "#2185D0",
+              color: "white",
+            }}
+            size="massive"
+          >
+            Rate your Mood
+          </Button>
+        }
+        centered={false}
+      >
+        <Modal.Header style={{ fontFamily: "Roboto Slab" }}>
+          Submit your Mood Rating
+          <Button
+            onClick={(e) => {
+              setOpen(false);
+            }}
+            negative
+            style={{ float: "right" }}
+            icon
+            size="small"
+          >
+            <Icon name="close" />
+          </Button>
+          {/* <span aria-hidden="true">&times;</span> */}
+        </Modal.Header>
+        <Modal.Content>
+          <Form>
+            <Form.Field style={{ width: "90%", margin: "10px auto" }}>
+              <label style={{ fontFamily: "Verdana" }}>Rate</label>
+              <Sliders setRate={setRating}></Sliders>
+            </Form.Field>
+
+            <div className="two fields">
+              <Form.Field
+                style={{
+                  width: "40%",
+                  margin: "15px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                required
+              >
+                <label style={{ fontFamily: "Verdana" }}>Name</label>
+                <input
+                  placeholder="Name"
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </Form.Field>
+              <Form.Field
+                style={{
+                  width: "40%",
+                  margin: "15px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                required
+              >
+                <label style={{ fontFamily: "Verdana" }}>Email ID</label>
+                <input
+                  placeholder="Email ID"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Field>
+            </div>
+
+            <Form.Field style={{ width: "90%", margin: "15px auto" }} required>
+              <label style={{ fontFamily: "Verdana" }}>
+                Rating Justification
+              </label>
+              <textarea
+                placeholder="Justify your Rating"
+                onChange={(e) => setMoodJustification(e.target.value)}
+                required
+              />
+            </Form.Field>
+            <Form.Field style={{ width: "90%", margin: "15px auto" }} required>
+              <label style={{ fontFamily: "Verdana" }}>Hashtags</label>
+              <Hashtag />
+            </Form.Field>
+
+            <Form.Field
+              size="big"
+              id="form-button-control-public"
+              control={Button}
+              content="Submit"
+              positive
+              style={{ marginLeft: "43%" }}
+              onClick={(e) => {
+                setOpen(false);
+                postData();
+              }}
+            />
+          </Form>
+        </Modal.Content>
+      </Modal>
+    </div>
   );
 }
 

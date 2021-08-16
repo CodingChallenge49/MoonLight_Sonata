@@ -38,11 +38,11 @@ const pieOptions = {
     },
   ],
   legend: {
-    position: "bottom",
+    position: "right",
     alignment: "center",
     textStyle: {
       color: "233238",
-      fontSize: 14,
+      fontSize: 24,
     },
   },
   tooltip: {
@@ -55,6 +55,7 @@ const pieOptions = {
     height: "80%",
   },
   fontName: "Roboto",
+  is3D: true,
 };
 class Summary extends React.Component {
   constructor(props) {
@@ -72,9 +73,10 @@ class Summary extends React.Component {
       (today.getMonth() + 1) +
       "-" +
       today.getDate();
+    date = "2021-08-15";
     //For PieChart
     const result = await axios.get(
-      `https://grads-coding-challenge-group-4.uc.r.appspot.com/getCountByRatingGroup/${date}`
+      `http://localhost:8080/getCountByRatingGroup/${date}`
     );
     let charData = [["call", "no"]];
     for (let column of result.data) {
@@ -83,7 +85,7 @@ class Summary extends React.Component {
 
     //For HashTags
     const getHashtags = await axios.get(
-      "https://grads-coding-challenge-group-4.uc.r.appspot.com/getCountByHashtag"
+      "http://localhost:8080/getCountByHashtag"
     );
     this.setState({ hashtag: getHashtags.data, columns: charData });
   }

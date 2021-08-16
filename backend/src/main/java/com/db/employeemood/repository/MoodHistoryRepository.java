@@ -48,6 +48,11 @@ public interface MoodHistoryRepository extends JpaRepository<MoodHistory, Intege
 	
 	@Query(value = "select hashtag as hashtag, count(*) as count  from mood_history where hashtag is NOT NULL group by hashtag order by count(*) desc", nativeQuery = true)
 	List<Object[]> getCountByHashtag();
+	
+	@Query(
+			value="select count(*) from mood_history where rating < 5 and DATEDIFF(?1,date_time) <= 7 and email = ?2",
+			nativeQuery=true)
+	int findCountOfDepression(String date, String email);
 
 	
 }

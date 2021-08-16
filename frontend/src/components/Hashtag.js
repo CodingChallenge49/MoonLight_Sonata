@@ -13,7 +13,7 @@ function Hashtag(props) {
   sourceRef.current = source;
 
   async function fetchData() {
-    const result = await axios.get("https://grads-coding-challenge-group-4.uc.r.appspot.com/getAllHashtags");
+    const result = await axios.get("http://localhost:8080/getAllHashtags");
     setSource(result.data);
   }
   useEffect(() => {
@@ -49,6 +49,7 @@ function Hashtag(props) {
           onSearchChange={handleSearchChange}
           results={props.exampleReducer.results}
           value={props.exampleReducer.value}
+          required
         />
       </Grid.Column>
     </Grid>
