@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aliceblue;
+  background-color: #002244;
 }
 
 code {
@@ -40,4 +40,24 @@ code {
 .feedback-status {
   line-height: 0.8em;
   text-align: center;
+}
+.tileColor {
+  background-color: white;
+  height: 50px;
+  color: black !important;
+}
+.redColor {
+  background-color: red !important;
+  height: 50px;
+  color: black !important;
+}
+.yellowColor {
+  background-color: yellow !important;
+  height: 50px;
+  color: black !important;
+}
+.greenColor {
+  background-color: green !important;
+  height: 50px;
+  color: black !important;
 }

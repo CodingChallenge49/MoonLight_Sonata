@@ -18,7 +18,7 @@ const SidebarComponent = (props) => {
   }
   return (
     <div>
-      <Grid columns={1} color="red">
+      <Grid columns={1} style={{ height: "120vh" }}>
         <Grid.Column>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
