@@ -52,5 +52,9 @@ public interface MoodHistoryRepository extends JpaRepository<MoodHistory, Intege
 			nativeQuery=true)
 	int findCountOfDepression(String date, String email);
 
-	
+	@Query(
+			value="select DATE(date_time),round(avg(rating)) from mood_history group by DATE(date_time)",
+			nativeQuery=true
+			)
+	List<Object[]> findRatingForCalendar();
 }

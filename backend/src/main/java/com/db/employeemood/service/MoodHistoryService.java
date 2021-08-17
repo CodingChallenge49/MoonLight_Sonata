@@ -16,6 +16,7 @@ import com.db.employeemood.repository.EmployeeRepository;
 import com.db.employeemood.repository.MoodHistoryRepository;
 import com.db.employeemood.response.PiechartData;
 import com.db.employeemood.response.AllHashtagsResponse;
+import com.db.employeemood.response.CalendarRating;
 import com.db.employeemood.response.HashtagCount;
 
 @Service
@@ -87,14 +88,14 @@ public class MoodHistoryService {
 		return response;
 	}
 	
-	public void sendEmail(String date, String to, String employee) {
+	public void sendEmail(String date,String to, String employee) {
 		int count = moodHistoryRepository.findCountOfDepression(date, employee);
 		if(count >= 3) {
 			SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 			simpleMailMessage.setFrom("mood.emailto.manager@gmail.com");
 			simpleMailMessage.setTo(to);
-			simpleMailMessage.setSubject("Have a look at your employee - MoodLight Sonata");
-			simpleMailMessage.setText("Your employee " + employee + " has given very low mood ratings through our portal over last week.\nThis is the right time to get in touch with your employee.\n\n\nThanks, MoodLight Sonata Team");
+			simpleMailMessage.setSubject("Have a look at your employee - Employee Mood");
+			simpleMailMessage.setText("Your employee " + employee + " has given very low mood ratings through our portal over last week.\nThis is the right time to get in touch with your employee.\n\n\nThanks, Mood of the Day Team");
 			javaMailSender.send(simpleMailMessage);
 		}
 		
@@ -103,5 +104,23 @@ public class MoodHistoryService {
 	public String getManager(String email) {
 		Employee employee = employeeRepository.findById(email).get();
 		return employee.getManager_email();
+	}
+	
+	public List<CalendarRating> getRatingForCalendar(){
+		List<CalendarRating> calendarRatings = new ArrayList<>();
+		List<Object[]> ratings = moodHistoryRepository.findRatingForCalendar();
+		ratings.forEach((rating)->{
+			String color="";
+			int ratingInt = Integer.parseInt(String.valueOf(rating[1]));
+			if(ratingInt < 4) {
+				color="red";
+			}else if(ratingInt < 7) {
+				color="yellow";
+			}else {
+				color="green";
+			}
+			calendarRatings.add(new CalendarRating(String.valueOf(rating[0]),color));
+		});
+		return calendarRatings;
 	}
 }

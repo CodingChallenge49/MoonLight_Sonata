@@ -239,7 +239,7 @@ function FormComponent(props) {
               positive
               style={{ marginLeft: "43%" }}
               onClick={(e) => {
-                // setOpen(false);
+                setOpen(false);
                 postData();
               }}
             />

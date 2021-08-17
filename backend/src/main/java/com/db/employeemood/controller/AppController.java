@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.db.employeemood.model.Employee;
 import com.db.employeemood.model.MoodHistory;
 import com.db.employeemood.response.AllHashtagsResponse;
+import com.db.employeemood.response.CalendarRating;
 import com.db.employeemood.response.HashtagCount;
 import com.db.employeemood.response.PiechartData;
 import com.db.employeemood.service.EmployeeService;
@@ -82,6 +83,12 @@ public class AppController {
 	private ResponseEntity<List<PiechartData>> getCountByRatingGroup(@PathVariable("date") String date){
 		List<PiechartData> dataResponse = moodHistoryService.getCountByRatingGroup(date);
 		return new ResponseEntity<List<PiechartData>>(dataResponse,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getRatingForCalendar")
+	private ResponseEntity<List<CalendarRating>> getRatingForCalendar(){
+		List<CalendarRating> dataResponse = moodHistoryService.getRatingForCalendar();
+		return new ResponseEntity<List<CalendarRating> >(dataResponse,HttpStatus.OK);
 	}
 	
 	@GetMapping("/getAllEmployee")
